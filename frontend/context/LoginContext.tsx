@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react"
+import { useRouter } from "next/router"
 
 export const loginContext = createContext<any>({})
 
@@ -12,8 +13,10 @@ export default function LoginContext({
 }: {
   children: React.ReactNode
 }) {
+  const router = useRouter()
+
   const [cookie, setCookie] = useState<string | null>(null)
-  const [user, setUser] = useState<userType | null>(null)
+  const [loggedUser, setLoggedUser] = useState<userType | null>(null)
 
   const login = async (username: string, password: string) => {
     const response = await fetch("http://localhost:8000/Login", {
@@ -30,8 +33,10 @@ export default function LoginContext({
 
     if (response.status == 200) {
       await response.json().then((data) => {
-        setUser(data)
+        setLoggedUser(data)
       })
+
+      router.push("/")
     } else {
       console.log(response.statusText)
     }
@@ -46,8 +51,7 @@ export default function LoginContext({
     })
 
     if (response.status == 200) {
-      setUser(null)
-      setCookie(null)
+      setLoggedUser(null)
     }
   }
 
@@ -73,7 +77,7 @@ export default function LoginContext({
   }
 
   const contextValue = {
-    user,
+    loggedUser,
     cookie,
     login,
     logout,

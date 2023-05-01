@@ -1,5 +1,7 @@
 import React, { createContext } from "react"
 
+import { userType } from "./LoginContext"
+
 export const dataContext = createContext<any>({})
 
 export type blogType = {
@@ -17,7 +19,7 @@ export default function DataContext({
 }: {
   children: React.ReactNode
 }) {
-  const getUserBlogs = async () => {
+  const getBlogs = async () => {
     const response = await fetch("http://localhost:8000/blogs", {
       method: "GET",
       mode: "cors",
@@ -39,9 +41,22 @@ export default function DataContext({
     return data
   }
 
+  const getUser = async (username: string | null) => {
+    if (!username) return
+
+    const response = await fetch(`http://localhost:8000/users/${username}`, {
+      method: "GET",
+      mode: "cors",
+    })
+    const data: userType | undefined = await response.json()
+
+    return data
+  }
+
   const contextValue = {
-    getUserBlogs,
+    getBlogs,
     getBlog,
+    getUser,
   }
   return (
     <dataContext.Provider value={contextValue}>{children}</dataContext.Provider>

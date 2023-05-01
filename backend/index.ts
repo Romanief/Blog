@@ -72,6 +72,30 @@ app.get("/blogs", async (req, res) => {
   return res.status(200).json(blogs)
 })
 
+// Returns a username and his id if exists
+app.get("/users/:username", async (req, res) => {
+  // retrieve username from params
+  const username = req.params.username
+
+  // Attempt retrieve username from db
+  let user: User | null
+  try {
+    user = await prisma.user.findUnique({
+      where: {
+        username: username,
+      },
+    })
+  } catch {
+    return res.status(500).send("Something went wrong, please try again later")
+  }
+
+  // Error handler: User does not exist
+  if (!user) return res.status(404).send("User does not exist")
+
+  // No error encountered, send data
+  return res.status(200).json({ username: user.username, id: user.id })
+})
+
 // Returns specific blog from unique id
 app.get("/blogs/:id", async (req, res) => {
   // retrieve id from params

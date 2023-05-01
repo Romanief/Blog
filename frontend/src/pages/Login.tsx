@@ -15,7 +15,7 @@ function Login() {
           <div className="flex flex-col h-2/3 justify-between">
             <input
               type="text"
-              className="mt-2 border-b-2 border-green-800 w-4/5 focus:w-full focus:outline-none hover:w-full mx-auto text-center"
+              className="mt-2 border-b-2 transition-all duration-100 border-green-800 w-4/5 focus:w-full focus:outline-none hover:w-full mx-auto text-center"
               placeholder="Insert Username"
               value={username}
               onChange={(e) => {
@@ -25,7 +25,7 @@ function Login() {
 
             <input
               type="password"
-              className="mt-2 border-b-2 border-green-800 w-4/5 focus:w-full focus:outline-none hover:w-full mx-auto text-center"
+              className="mt-2 border-b-2 border-green-800 w-4/5 focus:w-full focus:outline-none hover:w-full mx-auto text-center  transition-all duration-100"
               placeholder="Insert Password"
               value={password}
               onChange={(e) => {
@@ -36,7 +36,7 @@ function Login() {
 
           {username != "" && password != "" && (
             <button
-              className="border-green-800 w-1/3 mx-auto p-3 border-b-2 hover:w-1/2 transition"
+              className="border-green-800 w-1/3 mx-auto p-3 border-b-2 hover:w-1/2  transition-all duration-100"
               onClick={(e) => {
                 e.preventDefault()
                 login(username, password)

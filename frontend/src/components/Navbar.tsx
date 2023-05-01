@@ -1,4 +1,6 @@
 import { useContext } from "react"
+import Link from "next/link"
+
 import { loginContext } from "../../context/LoginContext"
 
 function Navbar() {
@@ -23,11 +25,11 @@ function Navbar() {
       <div className="text-xl flex justify-around w-3/4 font-bold">
         {user ? (
           <>
-            <a href={`/users/${user.username}`}>
+            <Link href={`/users/${user.username}`}>
               <p className="hover:underline cursor-pointer pt-5">
                 {user.username}
               </p>
-            </a>
+            </Link>
             <p className="hover:underline cursor-pointer pt-5" onClick={logout}>
               Logout
             </p>

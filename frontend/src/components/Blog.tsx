@@ -10,7 +10,7 @@ function Blog({
   author: string
 }) {
   return (
-    <div className="flex flex-col w-full p-3 border border-green-800 rounded-3xl mt-3">
+    <div className="flex flex-col w-full p-3 border border-green-800 rounded-3xl mt-3 transition-all duration-200 hover:bg-pale-broccoli">
       <div className="text-xl flex justify-between">
         <div className="font-bold">{title}</div>
         <div>{author}</div>
