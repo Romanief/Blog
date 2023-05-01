@@ -103,13 +103,14 @@ app.get("/logout", (req, res) => {
 // Create user
 app.post("/register", async (req, res) => {
   // Attempt to retrieve username
-  const username: string | undefined = req.body.username
+  const username: string | null = await req.body.username
 
   // Attempt to retrieve password
   // Error handler: Unable to retrieve password
-  let hashedPassword: string | undefined
+  let hashedPassword: string | null
   try {
-    hashedPassword = await bcrypt.hash(req.body.password, 10) //Bycrpt crypts password using the salt (second argument, 10)
+    console.log(req.body, req.body.password, username)
+    hashedPassword = await bcrypt.hash(await req.body.password, 10) //Bycrpt crypts password using the salt (second argument, 10)
   } catch {
     return res.status(400).send("Password required")
   }
@@ -164,7 +165,7 @@ app.post("/login", async (req, res) => {
   req.session.user = user
 
   // Return data to client
-  res.status(200).json({ username: user.username })
+  res.status(200).json({ username: user.username, id: user.id })
 })
 
 // Create Blog

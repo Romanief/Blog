@@ -1,6 +1,15 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import LoginContext from "../../context/LoginContext"
+import type { AppProps } from "next/app"
+
+import "@/styles/globals.css"
+import DataContext from "../../context/DataContext"
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <LoginContext>
+      <DataContext>
+        <Component {...pageProps} />
+      </DataContext>
+    </LoginContext>
+  )
 }
