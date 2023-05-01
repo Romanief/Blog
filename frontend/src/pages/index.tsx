@@ -1,9 +1,14 @@
 import Blog from "@/components/Blog"
 import { useContext, useEffect, useState } from "react"
+
 import { blogType, dataContext } from "../../context/DataContext"
+import { loginContext } from "../../context/LoginContext"
 import Layout from "../components/Layout"
 
+import Create from "@/components/Create"
+
 export default function Home() {
+  const { loggedUser } = useContext(loginContext)
   const { getBlogs, blogType } = useContext(dataContext)
 
   const [blogs, setBlogs] = useState<blogType[]>()
@@ -18,6 +23,7 @@ export default function Home() {
     <div>
       <Layout>
         <div className="flex-col w-3/4 lg:w-1/2">
+          {loggedUser && <Create />}
           {blogs?.map((x, i) => (
             <Blog
               key={i}

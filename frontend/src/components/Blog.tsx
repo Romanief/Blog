@@ -1,3 +1,4 @@
+import Link from "next/link"
 import React from "react"
 
 function Blog({
@@ -13,7 +14,7 @@ function Blog({
     <div className="flex flex-col w-full p-3 border border-green-800 rounded-3xl mt-3 transition-all duration-200 hover:bg-pale-broccoli">
       <div className="text-xl flex justify-between">
         <div className="font-bold">{title}</div>
-        <div>{author}</div>
+        <Link href={`/users/${author}`}>{author}</Link>
       </div>
       <div className=" text-lg">{body}</div>
     </div>

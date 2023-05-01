@@ -4,7 +4,7 @@ import Link from "next/link"
 import { loginContext } from "../../context/LoginContext"
 
 function Navbar() {
-  const { user, logout } = useContext(loginContext)
+  const { loggedUser, logout } = useContext(loginContext)
   const options = ["Something new", "Discover"]
   return (
     <div className="w-full flex justify-evenly pt-10 align-bottom border-b-2 bg-pale-broccoli/70">
@@ -17,17 +17,17 @@ function Navbar() {
       </div>
 
       <div className="text-5xl font-extrabold cursor-pointer translate-y-4">
-        <a href="/">
+        <Link href="/">
           <span className="text-green-800">B</span>loggoloush
-        </a>
+        </Link>
       </div>
 
       <div className="text-xl flex justify-around w-3/4 font-bold">
-        {user ? (
+        {loggedUser ? (
           <>
-            <Link href={`/users/${user.username}`}>
+            <Link href={`/users/${loggedUser.username}`}>
               <p className="hover:underline cursor-pointer pt-5">
-                {user.username}
+                {loggedUser.username}
               </p>
             </Link>
             <p className="hover:underline cursor-pointer pt-5" onClick={logout}>
@@ -36,12 +36,12 @@ function Navbar() {
           </>
         ) : (
           <>
-            <a href="/Login">
+            <Link href="/Login">
               <p className="hover:underline cursor-pointer pt-5">Login</p>
-            </a>
-            <a href="/Register">
+            </Link>
+            <Link href="/Register">
               <p className="hover:underline cursor-pointer pt-5">Register</p>
-            </a>
+            </Link>
           </>
         )}
       </div>

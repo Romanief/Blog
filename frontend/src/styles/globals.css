@@ -2,5 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+input {
+  @apply focus:w-full;
+  @apply focus:outline-none;
 }

@@ -34,9 +34,8 @@ export default function LoginContext({
     if (response.status == 200) {
       await response.json().then((data) => {
         setLoggedUser(data)
+        console.log(data)
       })
-
-      router.push("/")
     } else {
       console.log(response.statusText)
     }

@@ -2,13 +2,16 @@ import React, { useState, useEffect, useContext } from "react"
 import { useRouter } from "next/router"
 
 import Layout from "@/components/Layout"
-import { userType } from "../../../context/LoginContext"
+import { userType, loginContext } from "../../../context/LoginContext"
 import { blogType, dataContext } from "../../../context/DataContext"
 import Blog from "@/components/Blog"
+import Create from "@/components/Create"
 
 function User() {
   const router = useRouter()
   const { username } = router.query
+
+  const { loggedUser }: { loggedUser: userType } = useContext(loginContext)
 
   const { getUser, getBlogs } = useContext(dataContext)
 
@@ -32,6 +35,7 @@ function User() {
     <div>
       <Layout>
         <div className="flex-col w-3/4 lg:w-1/2">
+          {loggedUser?.username == user?.username && <Create />}
           <div>{user ? user.username : "No user"}</div>
           <div>
             {blogs ? (
