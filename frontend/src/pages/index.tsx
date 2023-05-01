@@ -19,7 +19,7 @@ export default function Home() {
       <Layout>
         <div className="flex-col w-3/4 lg:w-1/2">
           {blogs?.map((x) => (
-            <Blog title={x.title} body={x.body} />
+            <Blog title={x.title} body={x.body} author={x.author.username} />
           ))}
         </div>
       </Layout>

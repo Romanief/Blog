@@ -7,6 +7,9 @@ export type blogType = {
   body: string
   id: number
   author_id: number
+  author: {
+    username: string
+  }
 }
 
 export default function DataContext({

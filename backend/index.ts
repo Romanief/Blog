@@ -53,10 +53,20 @@ app.get("/blogs", async (req, res) => {
 
   // Attempt in getting blogs
   try {
-    blogs = await prisma.blog.findMany({})
+    blogs = await prisma.blog.findMany({
+      include: {
+        author: {
+          select: {
+            username: true,
+          },
+        },
+      },
+    })
   } catch {
     return res.status(500).send("Something went wrong, try again later")
   }
+
+  console.log(blogs)
 
   // No error occured, returning data to client
   return res.status(200).json(blogs)
