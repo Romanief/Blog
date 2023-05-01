@@ -1,27 +1,27 @@
-import React, { createContext, useState } from "react"
+import React, { createContext } from "react"
 
 export const dataContext = createContext<any>({})
+
+export type blogType = {
+  title: string
+  body: string
+  id: number
+  author_id: number
+}
 
 export default function DataContext({
   children,
 }: {
   children: React.ReactNode
 }) {
-  type user = {
-    username: string
-    id: number
-  }
-
-  const getUserBlogs = async (user: user | null) => {
-    if (!user) return
-
+  const getUserBlogs = async () => {
     const response = await fetch("http://localhost:8000/blogs", {
       method: "GET",
       mode: "cors",
-      credentials: "include",
     })
+    const data: Array<blogType> | undefined = await response.json()
 
-    return await response.json()
+    return data
   }
 
   const getBlog = async (id: number | null) => {
@@ -31,8 +31,9 @@ export default function DataContext({
       method: "GET",
       mode: "cors",
     })
+    const data: blogType | undefined = await response.json()
 
-    return await response.json()
+    return data
   }
 
   const contextValue = {

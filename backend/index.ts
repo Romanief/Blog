@@ -50,19 +50,10 @@ app.get("/", (_, res) => {
 // Returns all blogs from one User, Login required
 app.get("/blogs", async (req, res) => {
   let blogs: Blog[]
-  // Attempt retrieving userId
-  const userId: number | undefined = req.session.user?.id
 
-  // Error handler: Login required
-  if (!userId) return res.status(403).send("Login required")
-
-  // Attempt in getting user blogs
+  // Attempt in getting blogs
   try {
-    blogs = await prisma.blog.findMany({
-      where: {
-        author_id: userId,
-      },
-    })
+    blogs = await prisma.blog.findMany({})
   } catch {
     return res.status(500).send("Something went wrong, try again later")
   }

@@ -2,18 +2,18 @@ import React, { createContext, useState } from "react"
 
 export const loginContext = createContext<any>({})
 
+export type userType = {
+  username: string
+  id: number
+}
+
 export default function LoginContext({
   children,
 }: {
   children: React.ReactNode
 }) {
-  type User = {
-    username: string
-    id: number
-  }
-
   const [cookie, setCookie] = useState<string | null>(null)
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<userType | null>(null)
 
   const login = async (username: string, password: string) => {
     const response = await fetch("http://localhost:8000/Login", {
