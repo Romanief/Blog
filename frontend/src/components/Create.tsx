@@ -1,8 +1,37 @@
-import React, { useState } from "react"
+import { create } from "domain"
+import React, { useState, useContext } from "react"
+import { createSemanticDiagnosticsBuilderProgram } from "typescript"
+
+import DataContext, { dataContext } from "../../context/DataContext"
 
 function Create() {
+  const { getBlogs } = useContext(dataContext)
+
   const [title, setTitle] = useState<string>("")
   const [body, setBody] = useState<string>("")
+
+  const Create = async (title: string, body: string) => {
+    if (!title || !body) return
+
+    const response = await fetch("http://localhost:8000/blogs", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title,
+        body: body,
+      }),
+      credentials: "include",
+    })
+
+    if (response.status == 201) {
+      getBlogs()
+      setTitle("")
+      setBody("")
+    }
+  }
 
   return (
     <form className="rounded-3xl w-full flex flex-col text-center my-5 p-5 border border-green-700">
@@ -31,7 +60,7 @@ function Create() {
           type="submit"
           onClick={(e) => {
             e.preventDefault()
-            // TODO createBlog(title, body)
+            Create(title, body)
           }}
         />
       )}

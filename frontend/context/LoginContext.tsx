@@ -21,6 +21,7 @@ export default function LoginContext({
   const login = async (username: string, password: string) => {
     const response = await fetch("http://localhost:8000/Login", {
       method: "POST",
+      credentials: "include",
       mode: "cors",
       headers: {
         "Content-type": "application/json",

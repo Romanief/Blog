@@ -14,7 +14,7 @@ const prisma = new PrismaClient()
 const port: number = 8000
 
 // Server Middlewares
-app.use(cors())
+app.use(cors({ origin: "http://localhost:3000", credentials: true }))
 app.use(express.json())
 app.use(
   sessions({
@@ -23,6 +23,7 @@ app.use(
     saveUninitialized: false,
     cookie: {
       maxAge: 6000000,
+      secure: false,
     },
   })
 )
