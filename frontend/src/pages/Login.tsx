@@ -14,8 +14,8 @@ function Login() {
         <form className="flex flex-col mt-20 justify-between h-1/3 w-1/3 text-center text-xl">
           <div className="flex flex-col h-2/3 justify-between">
             <input
+              className="mt-2 border-b-2 border-green-800 w-4/5 focus:w-full focus:outline-none hover:w-full mx-auto text-center  transition-all duration-100"
               type="text"
-              className="mt-2 border-b-2 transition-all duration-100 border-green-800 w-4/5 focus:w-full focus:outline-none hover:w-full mx-auto text-center"
               placeholder="Insert Username"
               value={username}
               onChange={(e) => {

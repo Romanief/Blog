@@ -238,6 +238,7 @@ app.put("/blogs/:id", async (req, res) => {
   const id = parseInt(req.params.id)
   const title: string | undefined = req.body.title
   const body: string | undefined = req.body.body
+  console.log(body, title)
 
   // Attempt retrieve post from db
   let blog: Blog | null

@@ -29,6 +29,7 @@ export default function Home() {
               key={i}
               title={x.title}
               body={x.body}
+              id={x.id}
               author={x.author.username}
             />
           ))}

@@ -43,6 +43,7 @@ function User() {
                 .filter((x) => x.author.username == user?.username)
                 .map((x, i) => (
                   <Blog
+                    id={x.id}
                     key={i}
                     title={x.title}
                     body={x.body}
